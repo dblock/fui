@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+require 'gli'
+require 'fui'
+
+include GLI::App
+
+program_desc 'Find unused imports in an Objective-C codebase'
+
+flag [:p, :path], desc: 'Path to search', default_value: Dir.pwd
+switch [:v, :verbose], desc: 'Verbose', default_value: false
+
+default_command :find
+
+pre do |global_options, command, options, args|
+  $fui = Fui::Finder.new(global_options[:path])
+end
+
+desc "Find unused classes"
+command :find do |c|
+  c.action do |global_options, options, args|
+    root = Pathname.new($fui.path)
+    $fui.unused_references { |filename|
+      relative_path = Pathname.new(filename).relative_path_from(root).to_s
+      puts "Checking #{relative_path} ..." if global_options[:verbose]
+    }.each do |k, v|
+      relative_path = Pathname.new(k.path).relative_path_from(root).to_s
+      if global_options[:verbose]
+        puts "Found #{relative_path}"
+      else
+        puts relative_path
+      end
+    end
+  end
+end
+
+desc "Delete header and implementation files of unused classes"
+command :delete do |c|
+
+  c.switch [:t, :prompt], desc: 'Prompt on delete', default_value: true
+  c.switch [:f, :perform], desc: 'Actually perform deletion', default_value: false, :negatable => false
+
+  c.action do |global_options, options, args|
+    begin
+      system("stty raw -echo")
+
+      root = Pathname.new($fui.path)
+      $fui.unused_references { |filename|
+        relative_path = Pathname.new(filename).relative_path_from(root).to_s
+        puts "Checking #{relative_path} ..." if global_options[:verbose]
+      }.each do |k, v|
+        relative_path = Pathname.new(k.path).relative_path_from(root).to_s
+        if options[:prompt]
+          print "Remove #{relative_path}(.m) [y/N] "
+          response = STDIN.getc.upcase
+          puts "#{response.chr}\r\n"
+          next unless response.chr == 'Y'
+        end
+        if global_options[:verbose]
+          puts "Removing #{relative_path}\r\n"
+        else
+          puts "#{relative_path}\r\n"
+        end
+        File.delete(k.path) if options[:perform]
+        impl_path = k.path.gsub(/\.h$/, '.m')
+        if File.exists?(impl_path)
+          relative_path = Pathname.new(impl_path).relative_path_from(root).to_s
+          if global_options[:verbose]
+            puts "Removing #{relative_path}\r\n"
+          else
+            puts "#{relative_path}\r\n"
+          end
+          File.delete(impl_path) if options[:perform]
+        end
+      end
+
+    ensure
+      system("stty -raw echo")
+    end
+  end
+end
+
+exit run(ARGV)
