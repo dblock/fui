@@ -18,7 +18,7 @@ module Fui
           references[header] = []
         end
         Find.find(path) do |path|
-          next unless [".m", ".h", "*.pch"].include?(File.extname(path)) && File.ftype(path) == "file"
+          next unless [".m", ".h", ".pch"].include?(File.extname(path)) && File.ftype(path) == "file"
           File.open(path) do |file|
             filename = File.basename(path)
             yield path if block_given?

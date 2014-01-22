@@ -1,39 +1,68 @@
 require 'spec_helper'
 
 describe Fui::Finder do
-  before :each do
-    @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures'))
-  end
-  describe "#find" do
-    it "finds all files for which the block yields true" do
-      files = Fui::Finder.send(:find, @fixtures_dir) do |file|
-        File.extname(file) == ".h"
+  context "included from a .m file" do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/m'))
+    end
+    describe "#find" do
+      it "finds all files for which the block yields true" do
+        files = Fui::Finder.send(:find, @fixtures_dir) do |file|
+          File.extname(file) == ".h"
+        end
+        files.should eq Dir["#{@fixtures_dir}/*.h"]
       end
-      files.should eq Dir["#{@fixtures_dir}/*.h"]
+    end
+    describe "#headers" do
+      it "finds all headers" do
+        finder = Fui::Finder.new(@fixtures_dir)
+        finder.headers.map { |h| h.filename }.sort.should == ["unused_class.h", "used_class.h"]
+      end
+    end
+    describe "#references" do
+      it "maps references" do
+        finder = Fui::Finder.new(@fixtures_dir)
+        finder.references.size.should == 2
+        Hash[finder.references.map { |k, v| [ k.filename,  v.count ]}].should == {
+          "unused_class.h" => 0,
+          "used_class.h" => 1
+        }
+      end
+    end
+    describe "#unsed_references" do
+      it "finds unused references" do
+        finder = Fui::Finder.new(@fixtures_dir)
+        Hash[finder.unused_references.map { |k, v| [ k.filename,  v.count ]}].should == {
+          "unused_class.h" => 0
+        }
+      end
     end
   end
-  describe "#headers" do
-    it "finds all headers" do
-      finder = Fui::Finder.new(@fixtures_dir)
-      finder.headers.map { |h| h.filename }.sort.should == ["unused_class.h", "used_class.h"]
+  context "included from a .pch file" do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/pch'))
+    end
+    describe "#unsed_references" do
+      it "finds unused references" do
+        finder = Fui::Finder.new(@fixtures_dir)
+        Hash[finder.unused_references.map { |k, v| [ k.filename,  v.count ]}].should == {
+          "unused_class.h" => 0
+        }
+      end
     end
   end
-  describe "#references" do
-    it "maps references" do
-      finder = Fui::Finder.new(@fixtures_dir)
-      finder.references.size.should == 2
-      Hash[finder.references.map { |k, v| [ k.filename,  v.count ]}].should == {
-        "unused_class.h" => 0,
-        "used_class.h" => 1
-      }
+  context "included from a .h file" do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/h'))
     end
-  end
-  describe "#unsed_references" do
-    it "finds unused references" do
-      finder = Fui::Finder.new(@fixtures_dir)
-      Hash[finder.unused_references.map { |k, v| [ k.filename,  v.count ]}].should == {
-        "unused_class.h" => 0
-      }
+    describe "#unsed_references" do
+      it "finds unused references" do
+        finder = Fui::Finder.new(@fixtures_dir)
+        Hash[finder.unused_references.map { |k, v| [ k.filename,  v.count ]}].should == {
+          "header.h" => 0,
+          "unused_class.h" => 0
+        }
+      end
     end
   end
 end
