@@ -10,7 +10,7 @@ describe Fui::Finder do
         files = Fui::Finder.send(:find, @fixtures_dir) do |file|
           File.extname(file) == ".h"
         end
-        files.should eq Dir["#{@fixtures_dir}/*.h"]
+        files.sort.should eq Dir["#{@fixtures_dir}/*.h"].sort
       end
     end
     describe "#headers" do
