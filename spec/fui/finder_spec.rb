@@ -15,7 +15,7 @@ describe Fui::Finder do
   describe "#headers" do
     it "finds all headers" do
       finder = Fui::Finder.new(@fixtures_dir)
-      finder.headers.map { |h| h.filename }.should == ["unused_class.h", "used_class.h"]
+      finder.headers.map { |h| h.filename }.sort.should == ["unused_class.h", "used_class.h"]
     end
   end
   describe "#references" do
