@@ -16,6 +16,7 @@ pre do |global_options, command, options, args|
 end
 
 desc "Find unused classes"
+long_desc "Note: fui's exit code will be the number of unused interfaces found."
 command :find do |c|
   c.action do |global_options, options, args|
     root = Pathname.new($fui.path)
@@ -30,6 +31,7 @@ command :find do |c|
         puts relative_path
       end
     end
+    exit_now! nil, $fui.unused_references.count
   end
 end
 
@@ -72,7 +74,6 @@ command :delete do |c|
           File.delete(impl_path) if options[:perform]
         end
       end
-
     ensure
       system("stty -raw echo")
     end

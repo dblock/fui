@@ -29,6 +29,14 @@ describe Fui do
         files = `cd #{@fixtures} ; "#{@binary}"`
         files.split("\n").should eq ["unused_class.h"]
       end
+      it "returns a non-zero error code when files are found" do
+        `cd #{@fixtures} ; "#{@binary}"`
+        $?.exitstatus.should eq 1
+      end
+      it "returns a zero error code when no files are found" do
+        files = `cd #{File.expand_path(File.join(__FILE__, '../../../bin/'))} ; "#{@binary}"`
+        $?.exitstatus.should eq 0
+      end
     end
     describe "#verbose" do
       it "displays verbose output" do
@@ -45,6 +53,16 @@ describe Fui do
         output.should include "Removing unused_class.m (simulation)"
         File.exists?(File.join(@fixtures, 'unused_class.m')).should be_true
       end
+      it "deletes files with --perform" do
+        Dir.mktmpdir do |tmpdir|
+          FileUtils.cp_r "#{@fixtures}", tmpdir
+          output = `"#{@binary}" --verbose --path "#{tmpdir}" delete --no-prompt --perform`
+          output = output.split("\r\n")
+          output.should include "Removing m/unused_class.m"
+          File.exists?(File.join(tmpdir, 'm/unused_class.m')).should be_false
+        end
+      end
+      pending "prompts for deletion"
     end
   end
 end
