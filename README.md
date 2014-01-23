@@ -23,6 +23,8 @@ fui help
 fui find
 ```
 
+The `find` command lists all the files that contain unused interfaces and exits with the number of files found.
+
 #### Find Unused Classes in a Path
 
 ```
