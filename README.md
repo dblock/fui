@@ -41,6 +41,6 @@ See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
-Copyright (c) 2014, Daniel Doubrovkine, [Artsy](http://artsy.github.io), based on code by [@dstnbrkr](https://github.com/dstnbrkr).
+Copyright (c) 2014, Daniel Doubrovkine, [Artsy](http://artsy.github.io), based on code by [Dustin Barker](https://github.com/dstnbrkr).
 
 This project is licensed under the [MIT License](LICENSE.md).
