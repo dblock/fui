@@ -1,3 +1,7 @@
+### Next Release
+
+* By default will display (simulation) because no actual files are being deleted - [@dblock](https://github.com/dblock).
+
 ### 0.1.1 (1/22/2014)
 
 * Fix: properly handle .pch includes - [@dblock](https://github.com/dblock).
