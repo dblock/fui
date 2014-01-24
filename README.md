@@ -23,7 +23,7 @@ fui help
 fui find
 ```
 
-The `find` command lists all the files that contain unused interfaces and exits with the number of files found.
+The `find` command lists all the files that contain unused imports and exits with the number of files found.
 
 #### Find Unused Classes in a Path
 
@@ -39,7 +39,7 @@ fui --path=~/source/project/Name delete --perform --prompt
 
 ## Contributing
 
-See [CONTRIBUTING](CONTRIBUTING.md).
+There're a [few known issues](https://github.com/dblock/fui/issues), notably around storyboards and .xib files. Please contribute! See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
