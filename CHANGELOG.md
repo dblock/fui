@@ -1,6 +1,6 @@
 ### 0.2.0 (1/23/2014)
 
-* By default will display (simulation) because no actual files are being deleted - [@dblock](https://github.com/dblock).
+* By default will display "(simulation)" because no actual files are being deleted - [@dblock](https://github.com/dblock).
 * Fui's exit code with `find` will be the number of unused references found - [@dblock](https://github.com/dblock).
 
 ### 0.1.1 (1/22/2014)
