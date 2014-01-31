@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.licenses = [ "MIT" ]
   s.summary = "Find unused Objective-C imports."
   s.add_dependency "gli"
+  s.required_ruby_version = '>= 1.9.3'
 end
