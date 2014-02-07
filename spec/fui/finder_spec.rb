@@ -65,4 +65,15 @@ describe Fui::Finder do
       end
     end
   end
+  context "custom UIView subclasses" do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/nib'))
+    end
+    describe "#unsed_references" do
+      it "finds no unused references" do
+        finder = Fui::Finder.new(@fixtures_dir)
+        finder.unused_references.count.should == 0
+      end
+    end
+  end
 end

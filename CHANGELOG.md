@@ -1,6 +1,7 @@
 ### Next Release
 
 * [#5](https://github.com/dblock/fui/issues/5): Explicitly require Ruby 1.9.3 or later in .gemspec - [@paulyoung](https://github.com/paulyoung).
+* [#4](https://github.com/dblock/fui/issues/4): Added support for .storyboard and .xib `customClass` references - [@dblock](https://github.com/dblock).
 
 ### 0.2.0 (1/23/2014)
 

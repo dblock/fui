@@ -18,14 +18,11 @@ module Fui
           references[header] = []
         end
         Find.find(path) do |path|
-          next unless [".m", ".h", ".pch"].include?(File.extname(path)) && File.ftype(path) == "file"
-          File.open(path) do |file|
-            filename = File.basename(path)
-            yield path if block_given?
-            headers.each do |header|
-              filename_without_extension = File.basename(path, File.extname(path))
-              references[header] << path if filename_without_extension != header.filename_without_extension && File.read(file).include?("#import \"#{header.filename}\"")
-            end
+          next unless File.ftype(path) == "file"
+          if [".m", ".h", ".pch"].include?(File.extname(path))
+            process_code references, path, &block
+          elsif [".storyboard", ".xib"].include?(File.extname(path))
+            process_xml references, path, &block
           end
         end
         references
@@ -45,6 +42,27 @@ module Fui
         results << fpath if yield fpath
       }
       results
+    end
+
+    def process_code(references, path, &block)
+      File.open(path) do |file|
+        yield path if block_given?
+        filename = File.basename(path)
+        headers.each do |header|
+          filename_without_extension = File.basename(path, File.extname(path))
+          references[header] << path if filename_without_extension != header.filename_without_extension && File.read(file).include?("#import \"#{header.filename}\"")
+        end
+      end
+    end
+
+    def process_xml(references, path, &block)
+      File.open(path) do |file|
+        yield path if block_given?
+        headers.each do |header|
+          filename_without_extension = File.basename(path, File.extname(path))
+          references[header] << path if File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
+        end
+      end
     end
   end
 end
