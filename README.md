@@ -39,7 +39,7 @@ fui --path=~/source/project/Name delete --perform --prompt
 
 ## Contributing
 
-There're a [few known issues](https://github.com/dblock/fui/issues), notably around storyboards and .xib files. Please contribute! See [CONTRIBUTING](CONTRIBUTING.md).
+There're [a few feature requests and known issues](https://github.com/dblock/fui/issues). Please contribute! See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
