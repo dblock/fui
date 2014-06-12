@@ -31,6 +31,10 @@ The `find` command lists all the files that contain unused imports and exits wit
 fui --path=~/source/project/Name find
 ```
 
+#### Xcode plugin for fui
+
+There is also Xcode plugin for this tool. Check it [here](https://github.com/jcavar/xcfui)
+
 #### Delete All Unused Class Files w/ Prompt
 
 ```
