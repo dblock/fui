@@ -2,5 +2,5 @@ source "http://rubygems.org"
 
 gemspec
 
-gem "rspec"
+gem "rspec", "~> 3.0"
 gem "rake"

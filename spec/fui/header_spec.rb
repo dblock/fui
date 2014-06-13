@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Fui::Header do
   describe "#header?" do
     it "correctly matches .h files" do
-      Fui::Header.header?("foo.h").should be_true
+      Fui::Header.header?("foo.h").should be true
     end
     it "correctly matches .rb files" do
-      Fui::Header.header?("foo.rb").should be_false
+      Fui::Header.header?("foo.rb").should be false
     end
   end
   describe "#initialize" do

@@ -51,7 +51,7 @@ describe Fui do
         output = `"#{@binary}" --verbose --path "#{@fixtures}" delete --no-prompt`
         output = output.split("\r\n")
         output.should include "Removing unused_class.m (simulation)"
-        File.exists?(File.join(@fixtures, 'unused_class.m')).should be_true
+        File.exists?(File.join(@fixtures, 'unused_class.m')).should be true
       end
       it "deletes files with --perform" do
         Dir.mktmpdir do |tmpdir|
@@ -59,7 +59,7 @@ describe Fui do
           output = `"#{@binary}" --verbose --path "#{tmpdir}" delete --no-prompt --perform`
           output = output.split("\r\n")
           output.should include "Removing m/unused_class.m"
-          File.exists?(File.join(tmpdir, 'm/unused_class.m')).should be_false
+          File.exists?(File.join(tmpdir, 'm/unused_class.m')).should be false
         end
       end
       pending "prompts for deletion"
