@@ -1,7 +1,7 @@
 Fui
 ==========
 
-[![Build Status](https://travis-ci.org/dblock/fui.png)](https://travis-ci.org/dblock/fui)
+[![Build Status](https://travis-ci.org/dblock/fui.svg)](https://travis-ci.org/dblock/fui)
 
 Find unused Objective-C imports.
 
