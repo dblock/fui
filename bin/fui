@@ -13,7 +13,9 @@ switch [:x, :excludeselfxib], desc: 'Exclude self xib from search (e.g. if false
 default_command :find
 
 pre do |global_options, command, options, args|
-  $fui = Fui::Finder.new(global_options[:path], global_options[:excludeselfxib])
+  options = global_options.dup
+  path = options.delete(:path)
+  $fui = Fui::Finder.new(path, options)
 end
 
 desc "Find unused classes"

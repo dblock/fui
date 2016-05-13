@@ -15,13 +15,13 @@ describe Fui::Finder do
     end
     describe "#headers" do
       it "finds all headers" do
-        finder = Fui::Finder.new(@fixtures_dir, false)
+        finder = Fui::Finder.new(@fixtures_dir)
         finder.headers.map { |h| h.filename }.sort.should == ["unused_class.h", "used_class.h"]
       end
     end
     describe "#references" do
       it "maps references" do
-        finder = Fui::Finder.new(@fixtures_dir, false)
+        finder = Fui::Finder.new(@fixtures_dir)
         finder.references.size.should == 2
         Hash[finder.references.map { |k, v| [ k.filename,  v.count ]}].should == {
           "unused_class.h" => 0,
@@ -31,7 +31,7 @@ describe Fui::Finder do
     end
     describe "#unsed_references" do
       it "finds unused references" do
-        finder = Fui::Finder.new(@fixtures_dir, false)
+        finder = Fui::Finder.new(@fixtures_dir)
         Hash[finder.unused_references.map { |k, v| [ k.filename,  v.count ]}].should == {
           "unused_class.h" => 0
         }
@@ -44,7 +44,7 @@ describe Fui::Finder do
     end
     describe "#unsed_references" do
       it "finds unused references" do
-        finder = Fui::Finder.new(@fixtures_dir, false)
+        finder = Fui::Finder.new(@fixtures_dir)
         Hash[finder.unused_references.map { |k, v| [ k.filename,  v.count ]}].should == {
           "unused_class.h" => 0
         }
@@ -57,7 +57,7 @@ describe Fui::Finder do
     end
     describe "#unsed_references" do
       it "finds unused references" do
-        finder = Fui::Finder.new(@fixtures_dir, false)
+        finder = Fui::Finder.new(@fixtures_dir)
         Hash[finder.unused_references.map { |k, v| [ k.filename,  v.count ]}].should == {
           "header.h" => 0,
           "unused_class.h" => 0
@@ -71,7 +71,7 @@ describe Fui::Finder do
     end
     describe "#unsed_references" do
       it "finds no unused references" do
-        finder = Fui::Finder.new(@fixtures_dir, false)
+        finder = Fui::Finder.new(@fixtures_dir)
         finder.unused_references.count.should == 0
       end
     end
@@ -82,7 +82,7 @@ describe Fui::Finder do
     end
     describe "#unsed_references" do
       it "finds no unused references" do
-        finder = Fui::Finder.new(@fixtures_dir, false)
+        finder = Fui::Finder.new(@fixtures_dir)
         finder.unused_references.count.should == 0
       end
     end
@@ -93,7 +93,7 @@ describe Fui::Finder do
     end
     describe "#unsed_references" do
       it "finds one unused references" do
-        finder = Fui::Finder.new(@fixtures_dir, true)
+        finder = Fui::Finder.new(@fixtures_dir, {'excludeselfxib' => true})
         finder.unused_references.count.should == 1
       end
     end
