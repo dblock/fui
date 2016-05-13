@@ -1,9 +1,10 @@
 module Fui
   class Finder
-    attr_reader :path
+    attr_reader :path, :excludeselfxib
 
-    def initialize(path)
+    def initialize(path, excludeselfxib)
       @path = File.expand_path(path)
+	  @excludeselfxib = excludeselfxib
       raise Errno::ENOENT.new(path) unless Dir.exists?(@path)
     end
 
@@ -60,7 +61,7 @@ module Fui
         yield path if block_given?
         headers.each do |header|
           filename_without_extension = File.basename(path, File.extname(path))
-          references[header] << path if File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
+          references[header] << path if (!excludeselfxib || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
         end
       end
     end
