@@ -31,6 +31,14 @@ The `find` command lists all the files that contain unused imports and exits wit
 fui --path=~/source/project/Name find
 ```
 
+#### Find Unused Classes in a Path ignoring self XIB
+
+e.g. a Foo.h will be marked as unused even if a Foo.xib reference the class (and if there is no other reference to Foo.h...)
+
+```
+fui -x --path=~/source/project/Name find
+```
+
 #### Delete All Unused Class Files w/ Prompt
 
 ```

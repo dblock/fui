@@ -8,11 +8,14 @@ program_desc 'Find unused imports in an Objective-C codebase'
 
 flag [:p, :path], desc: 'Path to search', default_value: Dir.pwd
 switch [:v, :verbose], desc: 'Verbose', default_value: false
+switch [:x, :excludeselfxib], desc: 'Exclude self xib from search (e.g. if false, Foo.h will be marked as used if a Foo.xib reference the Foo class)', default_value: false
 
 default_command :find
 
 pre do |global_options, command, options, args|
-  $fui = Fui::Finder.new(global_options[:path])
+  options = global_options.dup
+  path = options.delete(:path)
+  $fui = Fui::Finder.new(path, options)
 end
 
 desc "Find unused classes"
