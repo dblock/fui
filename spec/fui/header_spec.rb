@@ -3,18 +3,18 @@ require 'spec_helper'
 describe Fui::Header do
   describe "#header?" do
     it "correctly matches .h files" do
-      Fui::Header.header?("foo.h").should be true
+      expect(Fui::Header.header?("foo.h")).to be true
     end
     it "correctly matches .rb files" do
-      Fui::Header.header?("foo.rb").should be false
+      expect(Fui::Header.header?("foo.rb")).to be false
     end
   end
   describe "#initialize" do
     it "creates an instance of header" do
       instance = Fui::Header.new(__FILE__)
-      instance.path.should == __FILE__
-      instance.filename.should == "header_spec.rb"
-      instance.filename_without_extension.should == "header_spec"
+      expect(instance.path).to eq(__FILE__)
+      expect(instance.filename).to eq("header_spec.rb")
+      expect(instance.filename_without_extension).to eq("header_spec")
     end
   end
 end
