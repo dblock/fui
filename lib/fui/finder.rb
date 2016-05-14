@@ -61,7 +61,7 @@ module Fui
         yield path if block_given?
         headers.each do |header|
           filename_without_extension = File.basename(path, File.extname(path))
-          references[header] << path if (!options['excludeselfxib'] || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
+          references[header] << path if (!options['ignorexib'] || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
         end
       end
     end

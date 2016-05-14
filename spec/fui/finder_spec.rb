@@ -76,7 +76,7 @@ describe Fui::Finder do
       end
     end
   end
-  context "excludeselfxib option set to false" do
+  context "ignorexib option set to false" do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/nibself'))
     end
@@ -87,13 +87,13 @@ describe Fui::Finder do
       end
     end
   end
-  context "excludeselfxib option set to true" do
+  context "ignorexib option set to true" do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/nibself'))
     end
     describe "#unsed_references" do
       it "finds one unused references" do
-        finder = Fui::Finder.new(@fixtures_dir, {'excludeselfxib' => true})
+        finder = Fui::Finder.new(@fixtures_dir, {'ignorexib' => true})
         finder.unused_references.count.should == 1
       end
     end

@@ -4,11 +4,11 @@ require 'fui'
 
 include GLI::App
 
-program_desc 'Find unused imports in an Objective-C codebase'
+program_desc 'Find unused imports in an Objective-C codebase.'
 
-flag [:p, :path], desc: 'Path to search', default_value: Dir.pwd
-switch [:v, :verbose], desc: 'Verbose', default_value: false
-switch [:x, :excludeselfxib], desc: 'Exclude self xib from search (e.g. if false, Foo.h will be marked as used if a Foo.xib reference the Foo class)', default_value: false
+flag [:p, :path], desc: 'Path to search.', default_value: Dir.pwd
+switch [:v, :verbose], desc: 'Produce verbose output.', default_value: false
+switch [:x, :ignorexib], desc: 'Ignore interface builder (.xib) files.', default_value: false
 
 default_command :find
 
