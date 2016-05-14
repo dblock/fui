@@ -4,8 +4,8 @@ module Fui
 
     def initialize(path, options = {})
       @path = File.expand_path(path)
-	  @options = options
-      raise Errno::ENOENT.new(path) unless Dir.exists?(@path)
+      @options = options
+      raise Errno::ENOENT, path unless Dir.exist?(@path)
     end
 
     def headers
@@ -19,10 +19,10 @@ module Fui
           references[header] = []
         end
         Find.find(path) do |path|
-          next unless File.ftype(path) == "file"
-          if [".m", ".h", ".pch"].include?(File.extname(path))
+          next unless File.ftype(path) == 'file'
+          if ['.m', '.h', '.pch'].include?(File.extname(path))
             process_code references, path, &block
-          elsif [".storyboard", ".xib"].include?(File.extname(path))
+          elsif ['.storyboard', '.xib'].include?(File.extname(path))
             process_xml references, path, &block
           end
         end
@@ -31,21 +31,21 @@ module Fui
     end
 
     def unused_references(&block)
-      @unused_references ||= references(&block).select { |k, v| v.count == 0 }
+      @unused_references ||= references(&block).select { |_k, v| v.count == 0 }
     end
 
     private
 
     # Find all files for which the block yields.
-    def self.find(path, &block)
+    def self.find(path)
       results = []
-      Find.find(path) { |fpath|
+      Find.find(path) do |fpath|
         results << fpath if yield fpath
-      }
+      end
       results
     end
 
-    def process_code(references, path, &block)
+    def process_code(references, path)
       File.open(path) do |file|
         yield path if block_given?
         filename = File.basename(path)
@@ -56,7 +56,7 @@ module Fui
       end
     end
 
-    def process_xml(references, path, &block)
+    def process_xml(references, path)
       File.open(path) do |file|
         yield path if block_given?
         headers.each do |header|

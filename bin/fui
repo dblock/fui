@@ -12,21 +12,21 @@ switch [:x, :ignorexib], desc: 'Ignore interface builder (.xib) files.', default
 
 default_command :find
 
-pre do |global_options, command, options, args|
+pre do |global_options, _command, options, _args|
   options = global_options.dup
   path = options.delete(:path)
   $fui = Fui::Finder.new(path, options)
 end
 
-desc "Find unused classes"
+desc 'Find unused classes'
 long_desc "Note: fui's exit code will be the number of unused interfaces found."
 command :find do |c|
-  c.action do |global_options, options, args|
+  c.action do |global_options, _options, _args|
     root = Pathname.new($fui.path)
-    $fui.unused_references { |filename|
+    $fui.unused_references do |filename|
       relative_path = Pathname.new(filename).relative_path_from(root).to_s
       puts "Checking #{relative_path} ..." if global_options[:verbose]
-    }.each do |k, v|
+    end.each do |k, _v|
       relative_path = Pathname.new(k.path).relative_path_from(root).to_s
       if global_options[:verbose]
         puts "Found #{relative_path}"
@@ -38,21 +38,20 @@ command :find do |c|
   end
 end
 
-desc "Delete header and implementation files of unused classes"
+desc 'Delete header and implementation files of unused classes'
 command :delete do |c|
-
   c.switch [:t, :prompt], desc: 'Prompt on delete', default_value: true
-  c.switch [:f, :perform], desc: 'Actually perform deletion', default_value: false, :negatable => false
+  c.switch [:f, :perform], desc: 'Actually perform deletion', default_value: false, negatable: false
 
-  c.action do |global_options, options, args|
+  c.action do |global_options, options, _args|
     begin
-      system("stty raw -echo")
+      system('stty raw -echo')
 
       root = Pathname.new($fui.path)
-      $fui.unused_references { |filename|
+      $fui.unused_references do |filename|
         relative_path = Pathname.new(filename).relative_path_from(root).to_s
         puts "Checking #{relative_path} ..." if global_options[:verbose]
-      }.each do |k, v|
+      end.each do |k, _v|
         relative_path = Pathname.new(k.path).relative_path_from(root).to_s
         if options[:prompt]
           print "Remove #{relative_path}(.m) [y/N] "
@@ -67,18 +66,17 @@ command :delete do |c|
         end
         File.delete(k.path) if options[:perform]
         impl_path = k.path.gsub(/\.h$/, '.m')
-        if File.exists?(impl_path)
-          relative_path = Pathname.new(impl_path).relative_path_from(root).to_s
-          if global_options[:verbose]
-            puts "Removing #{relative_path}#{options[:perform] ? '' : ' (simulation)'}\r\n"
-          else
-            puts "#{relative_path}#{options[:perform] ? '' : ' (simulation)'}\r\n"
-          end
-          File.delete(impl_path) if options[:perform]
+        next unless File.exist?(impl_path)
+        relative_path = Pathname.new(impl_path).relative_path_from(root).to_s
+        if global_options[:verbose]
+          puts "Removing #{relative_path}#{options[:perform] ? '' : ' (simulation)'}\r\n"
+        else
+          puts "#{relative_path}#{options[:perform] ? '' : ' (simulation)'}\r\n"
         end
+        File.delete(impl_path) if options[:perform]
       end
     ensure
-      system("stty -raw echo")
+      system('stty -raw echo')
     end
   end
 end

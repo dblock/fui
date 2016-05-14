@@ -3,7 +3,7 @@ module Fui
     attr_accessor :filename, :filename_without_extension, :path
 
     def self.header?(path)
-      File.extname(path) == ".h"
+      File.extname(path) == '.h'
     end
 
     def initialize(path)

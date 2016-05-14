@@ -4,7 +4,6 @@ require 'rubygems'
 require 'rspec'
 require 'tmpdir'
 require 'fui'
+require 'english'
 
-RSpec.configure do |config|
-  config.raise_errors_for_deprecations!
-end
+RSpec.configure(&:raise_errors_for_deprecations!)
