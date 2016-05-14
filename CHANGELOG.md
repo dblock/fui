@@ -1,4 +1,8 @@
-### 0.3.1 (Next)
+### 0.4.1 (Next)
+
+* Your contribution here.
+
+### 0.4.0 (5/14/2016)
 
 * [#20](https://github.com/dblock/fui/pull/20): Added `-x`, `--ignorexib`, find unused classes referenced from its own XIB - [@Ezor](https://github.com/Ezor).
 
