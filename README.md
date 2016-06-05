@@ -1,6 +1,7 @@
 Fui
 ==========
 
+[![Gem Version](https://badge.fury.io/rb/fui.svg)](https://badge.fury.io/rb/fui)
 [![Build Status](https://travis-ci.org/dblock/fui.svg)](https://travis-ci.org/dblock/fui)
 
 Find unused Objective-C imports.
