@@ -46,9 +46,9 @@ fui -x --path=~/source/project/Name find
 fui --path=~/source/project/Name delete --perform --prompt
 ```
 
-#### XCode Plugin
+#### Xcode Plugin
 
-Use [xcfui](https://github.com/jcavar/xcfui) for integration with XCode.
+Use [xcfui](https://github.com/jcavar/xcfui) for integration with Xcode.
 
 ## Contributing
 
