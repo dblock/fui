@@ -34,6 +34,39 @@ describe Fui::Finder do
       end
     end
   end
+  context 'included from a .mm file' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/mm'))
+    end
+    describe '#find' do
+      it 'finds all files for which the block yields true' do
+        files = Fui::Finder.send(:find, @fixtures_dir) do |file|
+          File.extname(file) == '.h'
+        end
+        expect(files.sort).to eq Dir["#{@fixtures_dir}/*.h"].sort
+      end
+    end
+    describe '#headers' do
+      it 'finds all headers' do
+        finder = Fui::Finder.new(@fixtures_dir)
+        expect(finder.headers.map(&:filename).sort).to eq(['unused_class.h', 'used_class.h'])
+      end
+    end
+    describe '#references' do
+      it 'maps references' do
+        finder = Fui::Finder.new(@fixtures_dir)
+        expect(finder.references.size).to eq(2)
+        expect(Hash[finder.references.map { |k, v| [k.filename, v.count] }]).to eq('unused_class.h' => 0,
+                                                                                   'used_class.h' => 1)
+      end
+    end
+    describe '#unsed_references' do
+      it 'finds unused references' do
+        finder = Fui::Finder.new(@fixtures_dir)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('unused_class.h' => 0)
+      end
+    end
+  end
   context 'included from a .pch file' do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/pch'))
