@@ -20,7 +20,7 @@ module Fui
         end
         Find.find(path) do |path|
           next unless File.ftype(path) == 'file'
-          if ['.m', '.h', '.pch'].include?(File.extname(path))
+          if ['.m', '.mm', '.h', '.pch'].include?(File.extname(path))
             process_code references, path, &block
           elsif ['.storyboard', '.xib'].include?(File.extname(path))
             process_xml references, path, &block
