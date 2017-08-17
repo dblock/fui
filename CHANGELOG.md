@@ -1,6 +1,9 @@
-### 0.4.1 (Next)
+### 0.4.2 (Next)
 
 * Your contribution here.
+
+### 0.4.1 (8/16/2017)
+
 * [#24](https://github.com/dblock/fui/pull/24): Support .mm files - [@shachlan](https://github.com/Shachlan).
 
 ### 0.4.0 (5/14/2016)
