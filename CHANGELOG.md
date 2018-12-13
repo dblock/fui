@@ -1,6 +1,7 @@
 ### 0.4.2 (Next)
 
 * Your contribution here.
+* [#28](https://github.com/dblock/fui/pull/28): Added `-g`, `--global` to add support for global imports (bracket notation) - [@jeffctown](https://github.com/jeffctown). 
 
 ### 0.4.1 (8/16/2017)
 
