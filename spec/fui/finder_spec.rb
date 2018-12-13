@@ -123,4 +123,26 @@ describe Fui::Finder do
       end
     end
   end
+  context 'global option set to true' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/global_import'))
+    end
+    describe '#unused_references' do
+      it 'finds one unused global reference' do
+        finder = Fui::Finder.new(@fixtures_dir, 'global' => true)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq("header.h" => 0, "unused_class.h" => 0)
+      end
+    end
+  end
+  context 'global option set to false' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/global_import'))
+    end
+    describe '#unused_references' do
+      it 'finds no unused global references' do
+        finder = Fui::Finder.new(@fixtures_dir, 'global' => false)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq("header.h" => 0, "unused_class.h" => 0, "used_class.h" => 0)
+      end
+    end
+  end
 end

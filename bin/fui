@@ -9,6 +9,7 @@ program_desc 'Find unused imports in an Objective-C codebase.'
 flag [:p, :path], desc: 'Path to search.', default_value: Dir.pwd
 switch [:v, :verbose], desc: 'Produce verbose output.', default_value: false
 switch [:x, :ignorexib], desc: 'Ignore interface builder (.xib) files.', default_value: false
+switch [:g, :global], desc: 'Also checks for imports in global (angle bracket) format.', default_value: false
 
 default_command :find
 
