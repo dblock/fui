@@ -130,7 +130,7 @@ describe Fui::Finder do
     describe '#unused_references' do
       it 'finds one unused global reference' do
         finder = Fui::Finder.new(@fixtures_dir, 'global' => true)
-        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq("header.h" => 0, "unused_class.h" => 0)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('header.h' => 0, 'unused_class.h' => 0)
       end
     end
   end
@@ -141,7 +141,7 @@ describe Fui::Finder do
     describe '#unused_references' do
       it 'finds no unused global references' do
         finder = Fui::Finder.new(@fixtures_dir, 'global' => false)
-        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq("header.h" => 0, "unused_class.h" => 0, "used_class.h" => 0)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('header.h' => 0, 'unused_class.h' => 0, 'used_class.h' => 0)
       end
     end
   end

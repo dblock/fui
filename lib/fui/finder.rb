@@ -52,18 +52,18 @@ module Fui
         headers.each do |header|
           filename_without_extension = File.basename(path, File.extname(path))
           file_contents = File.read(file)
-          global_import_exists = is_global_imported(file_contents, header)
-          local_import_exists = is_local_imported(file_contents, header)
+          global_import_exists = global_imported(file_contents, header)
+          local_import_exists = local_imported(file_contents, header)
           references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
         end
       end
     end
 
-    def is_local_imported(file_contents, header)
+    def local_imported(file_contents, header)
       file_contents.include?("#import \"#{header.filename}\"")
     end
 
-    def is_global_imported(file_contents, header)
+    def global_imported(file_contents, header)
       escaped_header = Regexp.quote(header.filename)
       regex = "(#import\s{1}<.+\/" + escaped_header + ">)"
       options['global'] && file_contents.match(regex)
