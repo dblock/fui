@@ -65,7 +65,7 @@ module Fui
 
     def global_imported(file_contents, header)
       escaped_header = Regexp.quote(header.filename)
-      regex = "(#import\s{1}<.+\/" + escaped_header + ">)"
+      regex = '(#import\s{1}<.+\/' + escaped_header + '>)'
       options['global'] && file_contents.match(regex)
     end
 
