@@ -52,18 +52,20 @@ module Fui
         headers.each do |header|
           filename_without_extension = File.basename(path, File.extname(path))
           file_contents = File.read(file)
-          global_import_exists = !options['ignore-global-imports'] && global_imported(file_contents, header)
-          local_import_exists = !options['ignore-local-imports'] && local_imported(file_contents, header)
+          global_import_exists = global_imported(file_contents, header)
+          local_import_exists = local_imported(file_contents, header)
           references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
         end
       end
     end
 
     def local_imported(file_contents, header)
+      return false if options['ignore-local-imports']
       file_contents.include?("#import \"#{header.filename}\"")
     end
 
     def global_imported(file_contents, header)
+      return false if options['ignore-global-imports']
       escaped_header = Regexp.quote(header.filename)
       regex = '(#import\s{1}<.+\/' + escaped_header + '>)'
       file_contents.match(regex)
@@ -74,7 +76,8 @@ module Fui
         yield path if block_given?
         headers.each do |header|
           filename_without_extension = File.basename(path, File.extname(path))
-          references[header] << path if (!options['ignore-xib-files'] || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
+          check_xibs = !options['ignore-xib-files']
+          references[header] << path if (check_xibs || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
         end
       end
     end

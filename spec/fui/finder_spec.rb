@@ -123,7 +123,7 @@ describe Fui::Finder do
       end
     end
   end
-  context 'global option set to true' do
+  context 'ignore global imports option set to true' do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/global_import'))
     end
@@ -134,7 +134,7 @@ describe Fui::Finder do
       end
     end
   end
-  context 'global option set to false' do
+  context 'ignore global imports option set to false' do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/global_import'))
     end
