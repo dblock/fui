@@ -7,6 +7,7 @@ include GLI::App
 program_desc 'Find unused imports in an Objective-C codebase.'
 
 flag [:p, :path], desc: 'Path to search.', default_value: Dir.pwd
+flag [:i, :'ignore-path'], desc: 'Path to ignore.', default_value: nil, multiple: true
 switch [:v, :verbose], desc: 'Produce verbose output.', default_value: false
 switch [:x, :'ignore-xib-files'], desc: 'Ignore interface builder (.xib) files.', default_value: false
 switch [:g, :'ignore-global-imports'], desc: 'Ignores imports using a global (angle bracket) format.', default_value: false

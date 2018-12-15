@@ -7,10 +7,9 @@ describe Fui::Finder do
     end
     describe '#find' do
       it 'finds all files for which the block yields true' do
-        files = Fui::Finder.send(:find, @fixtures_dir) do |file|
-          File.extname(file) == '.h'
-        end
-        expect(files.sort).to eq Dir["#{@fixtures_dir}/*.h"].sort
+        finder = Fui::Finder.new(@fixtures_dir)
+        headers = finder.headers.map(&:path)
+        expect(headers.sort).to eq Dir["#{@fixtures_dir}/*.h"].sort
       end
     end
     describe '#headers' do
@@ -40,10 +39,9 @@ describe Fui::Finder do
     end
     describe '#find' do
       it 'finds all files for which the block yields true' do
-        files = Fui::Finder.send(:find, @fixtures_dir) do |file|
-          File.extname(file) == '.h'
-        end
-        expect(files.sort).to eq Dir["#{@fixtures_dir}/*.h"].sort
+        finder = Fui::Finder.new(@fixtures_dir)
+        headers = finder.headers.map(&:path)
+        expect(headers.sort).to eq Dir["#{@fixtures_dir}/*.h"].sort
       end
     end
     describe '#headers' do
@@ -142,6 +140,42 @@ describe Fui::Finder do
       it 'finds no unused global references' do
         finder = Fui::Finder.new(@fixtures_dir, 'ignore-global-imports' => true)
         expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('header.h' => 0, 'unused_class.h' => 0, 'used_class.h' => 0)
+      end
+    end
+  end
+  context 'ignore path option with one argument' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/ignore_directories'))
+      @ignore_dir = File.expand_path(File.join(__FILE__, '../../fixtures/ignore_directories/ignore'))
+    end
+    describe '#unused_references' do
+      it 'finds two unused references' do
+        finder = Fui::Finder.new(@fixtures_dir, 'ignore-path' => [@ignore_dir])
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('another_ignored_class.h' => 0, 'unused_class.h' => 0)
+      end
+    end
+  end
+  context 'ignore path option with multiple arguments' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/ignore_directories'))
+      @ignore_dirs = [File.expand_path(File.join(__FILE__, '../../fixtures/ignore_directories/ignore')),
+                      File.expand_path(File.join(__FILE__, '../../fixtures/ignore_directories/another_ignore'))]
+    end
+    describe '#unused_references' do
+      it 'finds one unused reference' do
+        finder = Fui::Finder.new(@fixtures_dir, 'ignore-path' => @ignore_dirs)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('unused_class.h' => 0)
+      end
+    end
+  end
+  context 'ignore path option with invalid argument' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/ignore_directories'))
+    end
+    describe '#initialization' do
+      it 'raises an error' do
+        finder = Fui::Finder.new(@fixtures_dir, 'ignore-path' => ['i_dont_exist'])
+        expect { finder.ignores } .to raise_error(Errno::ENOENT)
       end
     end
   end
