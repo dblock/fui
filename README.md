@@ -34,11 +34,30 @@ fui --path=~/source/project/Name find
 
 #### Find Unused Classes in a Path Skipping Interface Builder (.xib) Files
 
-ForRunning `fui` with `-x` (or `--ignorexib`) will, for example, mark `Foo.h` as unused when `Foo.xib` holds a reference to the `Foo` class and no other references to Foo.h exist.
+ForRunning `fui` with `-x` (or `--ignore-xib-files`) will, for example, mark `Foo.h` as unused when `Foo.xib` holds a reference to the `Foo` class and no other references to Foo.h exist.
 
 ```
 fui -x --path=~/source/project/Name find
 ```
+
+#### Find Unused Classes in a Path Ignoring Local (quotation syntax) Imports
+
+For Running `fui` with `-l` (or `--ignore-local-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a local import of `Foo.h` (`#import Foo.h`)
+
+```
+fui -l --path=~/source/project/Name find
+
+``` 
+
+#### Find Unused Classes in a Path Ignoring Global (bracket syntax) Imports
+
+For Running `fui` with `-g` (or `--ignore-global-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a global import of `Foo.h` (`#import <Framework/Foo.h>`)
+
+```
+fui -g --path=~/source/project/Name find
+
+``` 
+
 
 #### Delete All Unused Class Files w/ Prompt
 

@@ -101,7 +101,7 @@ describe Fui::Finder do
       end
     end
   end
-  context 'ignorexib option set to false' do
+  context 'ignore-xib-files option set to false' do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/nibself'))
     end
@@ -112,14 +112,36 @@ describe Fui::Finder do
       end
     end
   end
-  context 'ignorexib option set to true' do
+  context 'ignore-xib-files option set to true' do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/nibself'))
     end
     describe '#unsed_references' do
       it 'finds one unused references' do
-        finder = Fui::Finder.new(@fixtures_dir, 'ignorexib' => true)
+        finder = Fui::Finder.new(@fixtures_dir, 'ignore-xib-files' => true)
         expect(finder.unused_references.count).to eq(1)
+      end
+    end
+  end
+  context 'ignore global imports option set to true' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/global_import'))
+    end
+    describe '#unused_references' do
+      it 'finds one unused global reference' do
+        finder = Fui::Finder.new(@fixtures_dir, 'ignore-global-imports' => false)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('header.h' => 0, 'unused_class.h' => 0)
+      end
+    end
+  end
+  context 'ignore global imports option set to false' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/global_import'))
+    end
+    describe '#unused_references' do
+      it 'finds no unused global references' do
+        finder = Fui::Finder.new(@fixtures_dir, 'ignore-global-imports' => true)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('header.h' => 0, 'unused_class.h' => 0, 'used_class.h' => 0)
       end
     end
   end
