@@ -1,7 +1,8 @@
-### 0.4.2 (Next)
+### 0.5.0 (Next)
 
 * [#28](https://github.com/dblock/fui/pull/28): Added support for finding global imports (bracket notation) - [@jeffctown](https://github.com/jeffctown).
 * [#28](https://github.com/dblock/fui/pull/28): Added ability to turn off global or local import checks through `-g`, `--ignore-global-imports` or `-l`, `--ignore-local-imports` - [@jeffctown](https://github.com/jeffctown).
+* [#28](https://github.com/dblock/fui/pull/28): The `--ignorexib` option has been renamed to `--ignore-xib-files` - [@jeffctown](https://github.com/jeffctown).
 * Your contribution here.
 
 ### 0.4.1 (8/16/2017)
