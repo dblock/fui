@@ -6,11 +6,11 @@ include GLI::App
 
 program_desc 'Find unused imports in an Objective-C codebase.'
 
-flag [:p, :path], desc: 'Path to search.', default_value: Dir.pwd
-switch [:v, :verbose], desc: 'Produce verbose output.', default_value: false
-switch [:x, :'ignore-xib-files'], desc: 'Ignore interface builder (.xib) files.', default_value: false
-switch [:g, :'ignore-global-imports'], desc: 'Ignores imports using a global (angle bracket) format.', default_value: false
-switch [:l, :'ignore-local-imports'], desc: 'Ignores imports using a local (quote) format.', default_value: false
+flag %i[p path], desc: 'Path to search.', default_value: Dir.pwd
+switch %i[v verbose], desc: 'Produce verbose output.', default_value: false
+switch %i[x ignore-xib-files], desc: 'Ignore interface builder (.xib) files.', default_value: false
+switch %i[g ignore-global-imports], desc: 'Ignores imports using a global (angle bracket) format.', default_value: false
+switch %i[l ignore-local-imports], desc: 'Ignores imports using a local (quote) format.', default_value: false
 
 default_command :find
 
@@ -42,8 +42,8 @@ end
 
 desc 'Delete header and implementation files of unused classes'
 command :delete do |c|
-  c.switch [:t, :prompt], desc: 'Prompt on delete', default_value: true
-  c.switch [:f, :perform], desc: 'Actually perform deletion', default_value: false, negatable: false
+  c.switch %i[t prompt], desc: 'Prompt on delete', default_value: true
+  c.switch %i[f perform], desc: 'Actually perform deletion', default_value: false, negatable: false
 
   c.action do |global_options, options, _args|
     begin
@@ -69,6 +69,7 @@ command :delete do |c|
         File.delete(k.path) if options[:perform]
         impl_path = k.path.gsub(/\.h$/, '.m')
         next unless File.exist?(impl_path)
+
         relative_path = Pathname.new(impl_path).relative_path_from(root).to_s
         if global_options[:verbose]
           puts "Removing #{relative_path}#{options[:perform] ? '' : ' (simulation)'}\r\n"

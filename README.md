@@ -46,8 +46,7 @@ For Running `fui` with `-l` (or `--ignore-local-imports`) will, for example, mar
 
 ```
 fui -l --path=~/source/project/Name find
-
-``` 
+```
 
 #### Find Unused Classes in a Path Ignoring Global (bracket syntax) Imports
 
@@ -55,9 +54,7 @@ For Running `fui` with `-g` (or `--ignore-global-imports`) will, for example, ma
 
 ```
 fui -g --path=~/source/project/Name find
-
-``` 
-
+```
 
 #### Delete All Unused Class Files w/ Prompt
 
@@ -75,6 +72,6 @@ There're [a few feature requests and known issues](https://github.com/dblock/fui
 
 ## Copyright and License
 
-Copyright (c) 2014, Daniel Doubrovkine, [Artsy](http://artsy.github.io), based on code by [Dustin Barker](https://github.com/dstnbrkr).
+Copyright (c) 2014-2018, Daniel Doubrovkine, [Artsy](http://artsy.github.io), based on code by [Dustin Barker](https://github.com/dstnbrkr).
 
 This project is licensed under the [MIT License](LICENSE.md).

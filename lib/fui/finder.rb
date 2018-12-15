@@ -20,6 +20,7 @@ module Fui
         end
         Find.find(path) do |path|
           next unless File.ftype(path) == 'file'
+
           if ['.m', '.mm', '.h', '.pch'].include?(File.extname(path))
             process_code references, path, &block
           elsif ['.storyboard', '.xib'].include?(File.extname(path))
@@ -61,11 +62,13 @@ module Fui
 
     def local_imported(file_contents, header)
       return false if options['ignore-local-imports']
+
       file_contents.include?("#import \"#{header.filename}\"")
     end
 
     def global_imported(file_contents, header)
       return false if options['ignore-global-imports']
+
       escaped_header = Regexp.quote(header.filename)
       regex = '(#import\s{1}<.+\/' + escaped_header + '>)'
       file_contents.match(regex)
