@@ -16,8 +16,10 @@ module Fui
 
     def ignores
       return unless options['ignore-path']
+
       @ignores ||= options['ignore-path'].map do |i|
         raise Errno::ENOENT, i unless Dir.exist?(i)
+
         Pathname(i)
       end
     end
@@ -51,8 +53,10 @@ module Fui
       Find.find(path) do |fpath|
         if FileTest.directory?(fpath)
           next unless ignores
+
           ignores.each do |ignore|
             next unless fpath.include?(ignore.realpath.to_s)
+
             puts "Ignoring Directory: #{fpath}" if options[:verbose]
             Find.prune
           end
@@ -77,11 +81,13 @@ module Fui
 
     def local_imported(file_contents, header)
       return false if options['ignore-local-imports']
+
       file_contents.include?("#import \"#{header.filename}\"")
     end
 
     def global_imported(file_contents, header)
       return false if options['ignore-global-imports']
+
       escaped_header = Regexp.quote(header.filename)
       regex = '(#import\s{1}<.+\/' + escaped_header + '>)'
       file_contents.match(regex)
