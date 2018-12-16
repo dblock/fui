@@ -6,19 +6,35 @@ Fui
 
 Find unused Objective-C imports.
 
+# Table of Contents
+
+- [Usage](#usage)
+  - [Get Help](#get-help)
+  - [Find Unused Classes in the Current Directory](#find-unused-classes-in-the-current-directory)
+  - [Find Unused Classes in any Path](#find-unused-classes-in-any-path)
+  - [Skip Interface Builder (.xib) Files](#skip-interface-builder-xib-files)
+  - [Ignore Local Imports](#ignore-local-imports)
+  - [Ignore Global Imports](#ignore-global-imports)
+  - [Ignore a Path](#ignore-a-path)
+  - [Ignore Multiple Paths](#ignore-multiple-paths)
+  - [Delete All Unused Class Files with Prompt](#delete-all-unused-class-files-with-prompt)
+- [Xcode Plugin](#xcode-plugin)
+- [Contributing](#contributing)
+- [Copyright and License](#copyright-and-license)
+
 ## Usage
 
 ```
 gem install fui
 ```
 
-#### Get Help
+### Get Help
 
 ```
 fui help
 ```
 
-#### Find Unused Classes in the Current Directory
+### Find Unused Classes in the Current Directory
 
 ```
 fui find
@@ -26,13 +42,13 @@ fui find
 
 The `find` command lists all the files that contain unused imports and exits with the number of files found.
 
-#### Find Unused Classes in a Path
+### Find Unused Classes in any Path
 
 ```
 fui --path=~/source/project/Name find
 ```
 
-#### Find Unused Classes in a Path Skipping Interface Builder (.xib) Files
+### Skip Interface Builder (.xib) Files
 
 Running `fui` with `-x` (or `--ignore-xib-files`) will, for example, mark `Foo.h` as unused when `Foo.xib` holds a reference to the `Foo` class and no other references to Foo.h exist.
 
@@ -40,45 +56,45 @@ Running `fui` with `-x` (or `--ignore-xib-files`) will, for example, mark `Foo.h
 fui -x --path=~/source/project/Name find
 ```
 
-#### Find Unused Classes in a Path Ignoring Local (quotation syntax) Imports
+### Ignore Local Imports
 
-Running `fui` with `-l` (or `--ignore-local-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a local import of `Foo.h` (`#import Foo.h`)
+Running `fui` with `-l` (or `--ignore-local-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a local (quotation syntax) import of `Foo.h` (eg. `#import Foo.h`).
 
 ```
 fui -l --path=~/source/project/Name find
 ```
 
-#### Find Unused Classes in a Path Ignoring Global (bracket syntax) Imports
+### Ignore Global Imports
 
-Running `fui` with `-g` (or `--ignore-global-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a global import of `Foo.h` (`#import <Framework/Foo.h>`)
+Running `fui` with `-g` (or `--ignore-global-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a global (bracket syntax) import of `Foo.h` (eg. `#import <Framework/Foo.h>`).
 
 ```
 fui -g --path=~/source/project/Name find
 ```
 
-#### Find Unused Classes in a Path And Also Ignoring a Path
+### Ignore a Path
 
-Running `fui` with `-i` (or `--ignore-path`) will, for example, ignore a `Pods` folder when searching for headers or referencing files
+Running `fui` with `-i` (or `--ignore-path`) will, for example, ignore a `Pods` folder when searching for headers or referencing files.
 
 ```
 fui --path=~/source/project/Name --ignore-path=Pods find
 ```
 
-#### Find Unused Classes in a Path And Also Ignoring Multiple Paths
+### Ignore Multiple Paths
 
-Running `fui` with `-i` (or `--ignore-path`) can ignore multiple folders when searching for headers or referencing files
+Running `fui` with `-i` (or `--ignore-path`) can ignore multiple folders when searching for headers or referencing files.
 
 ```
 fui --path=~/source/project/Name --ignore-path=Pods --ignore-path=Libraries find
 ```
 
-#### Delete All Unused Class Files w/ Prompt
+### Delete All Unused Class Files with Prompt
 
 ```
 fui --path=~/source/project/Name delete --perform --prompt
 ```
 
-#### Xcode Plugin
+## Xcode Plugin
 
 Use [xcfui](https://github.com/jcavar/xcfui) for integration with Xcode.
 
