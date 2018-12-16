@@ -15,7 +15,7 @@ switch %i[l ignore-local-imports], desc: 'Ignores imports using a local (quote) 
 
 default_command :find
 
-pre do |global_options, _command, options, _args|
+pre do |global_options, _command, _options, _args|
   options = global_options.dup
   path = options.delete(:path)
   $fui = Fui::Finder.new(path, options)

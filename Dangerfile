@@ -1,0 +1,2 @@
+toc.check
+changelog.check

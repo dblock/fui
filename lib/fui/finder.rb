@@ -45,8 +45,7 @@ module Fui
     end
 
     def unused_references(&block)
-      puts bridging_headers
-      @unused_references ||= references(&block).select { |k, v| v.count == 0 && !bridging_headers.include?(k.filename) }
+      @unused_references ||= references(&block).select { |k, v| v.count.zero? && !bridging_headers.include?(k.filename) }
     end
 
     private
