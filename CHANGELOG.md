@@ -6,6 +6,7 @@
 * [#28](https://github.com/dblock/fui/pull/28): The `--ignorexib` option has been renamed to `--ignore-xib-files` - [@jeffctown](https://github.com/jeffctown).
 * [#31](https://github.com/dblock/fui/pull/31): Added Danger, PR linter and a README TOC - [@jeffctown](https://github.com/jeffctown).
 * [#32](https://github.com/dblock/fui/pull/32): Added support for ignoring bridging headers - [@jeffctown](https://github.com/jeffctown).
+* [#33](https://github.com/dblock/fui/pull/33): Added RELEASING.md to document release process - [@jeffctown](https://github.com/jeffctown).
 * Your contribution here.
 
 ### 0.4.1 (8/16/2017)
