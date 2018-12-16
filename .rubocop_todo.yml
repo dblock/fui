@@ -50,8 +50,6 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'lib/fui/finder.rb'
-    - 'lib/fui/header.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedVariables.
