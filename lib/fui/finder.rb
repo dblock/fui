@@ -1,3 +1,5 @@
+require 'pathname'
+
 module Fui
   class Finder
     attr_reader :path, :options
@@ -9,7 +11,17 @@ module Fui
     end
 
     def headers
-      @headers ||= Finder.find(path) { |path| Header.header?(path) }.collect { |path| Header.new(path) }
+      @headers ||= find(path) { |path| Header.header?(path) }.collect { |path| Header.new(path) }
+    end
+
+    def ignores
+      return unless options['ignore-path']
+
+      @ignores ||= options['ignore-path'].map do |i|
+        raise Errno::ENOENT, i unless Dir.exist?(i)
+
+        Pathname(i)
+      end
     end
 
     def references(&block)
@@ -19,8 +31,6 @@ module Fui
           references[header] = []
         end
         Find.find(path) do |path|
-          next unless File.ftype(path) == 'file'
-
           if ['.m', '.mm', '.h', '.pch'].include?(File.extname(path))
             process_code references, path, &block
           elsif ['.storyboard', '.xib'].include?(File.extname(path))
@@ -38,9 +48,19 @@ module Fui
     private
 
     # Find all files for which the block yields.
-    def self.find(path)
+    def find(path)
       results = []
       Find.find(path) do |fpath|
+        if FileTest.directory?(fpath)
+          next unless ignores
+
+          ignores.each do |ignore|
+            next unless fpath.include?(ignore.realpath.to_s)
+
+            puts "Ignoring Directory: #{fpath}" if options[:verbose]
+            Find.prune
+          end
+        end
         results << fpath if yield fpath
       end
       results
@@ -49,7 +69,6 @@ module Fui
     def process_code(references, path)
       File.open(path) do |file|
         yield path if block_given?
-        filename = File.basename(path)
         headers.each do |header|
           filename_without_extension = File.basename(path, File.extname(path))
           file_contents = File.read(file)
