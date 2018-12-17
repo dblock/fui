@@ -1,6 +1,5 @@
-require 'pathname'
-
 module Fui
+  # A class to find various things in an Objective C project.
   class Finder
     attr_reader :path, :options
 
@@ -12,6 +11,10 @@ module Fui
 
     def headers
       @headers ||= find(path) { |path| Header.header?(path) }.collect { |path| Header.new(path) }
+    end
+
+    def bridging_headers
+      @bridging_headers ||= find(path) { |path| Project.project?(path) }.collect { |path| Project.new(path).bridging_headers(options[:verbose]) }
     end
 
     def ignores
@@ -42,7 +45,7 @@ module Fui
     end
 
     def unused_references(&block)
-      @unused_references ||= references(&block).select { |_k, v| v.count == 0 }
+      @unused_references ||= references(&block).select { |k, v| v.count.zero? && !bridging_headers.include?(k.filename) }
     end
 
     private
@@ -66,19 +69,6 @@ module Fui
       results
     end
 
-    def process_code(references, path)
-      File.open(path) do |file|
-        yield path if block_given?
-        headers.each do |header|
-          filename_without_extension = File.basename(path, File.extname(path))
-          file_contents = File.read(file)
-          global_import_exists = global_imported(file_contents, header)
-          local_import_exists = local_imported(file_contents, header)
-          references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
-        end
-      end
-    end
-
     def local_imported(file_contents, header)
       return false if options['ignore-local-imports']
 
@@ -91,6 +81,19 @@ module Fui
       escaped_header = Regexp.quote(header.filename)
       regex = '(#import\s{1}<.+\/' + escaped_header + '>)'
       file_contents.match(regex)
+    end
+
+    def process_code(references, path)
+      File.open(path) do |file|
+        yield path if block_given?
+        headers.each do |header|
+          filename_without_extension = File.basename(path, File.extname(path))
+          file_contents = File.read(file)
+          global_import_exists = global_imported(file_contents, header)
+          local_import_exists = local_imported(file_contents, header)
+          references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
+        end
+      end
     end
 
     def process_xml(references, path)

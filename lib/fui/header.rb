@@ -1,4 +1,5 @@
 module Fui
+  # Represents a Header (.h) file
   class Header
     attr_accessor :filename, :filename_without_extension, :path
 

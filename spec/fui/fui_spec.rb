@@ -34,7 +34,7 @@ describe Fui do
         expect($CHILD_STATUS.exitstatus).to eq 1
       end
       it 'returns a zero error code when no files are found' do
-        files = `cd #{File.expand_path(File.join(__FILE__, '../../../bin/'))} ; "#{@binary}"`
+        _files = `cd #{File.expand_path(File.join(__FILE__, '../../../bin/'))} ; "#{@binary}"`
         expect($CHILD_STATUS.exitstatus).to eq 0
       end
     end
