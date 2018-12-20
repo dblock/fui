@@ -1,3 +1,7 @@
+### 0.5.1 (Next)
+
+* Your contribution here.
+
 ### 0.5.0 (2018/12/19)
 
 * [#29](https://github.com/dblock/fui/pull/29): Added support for ignoring paths through `-i`, `--ignore-path` - [@jeffctown](https://github.com/jeffctown).
