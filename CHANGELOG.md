@@ -1,4 +1,4 @@
-### 0.5.0 (Next)
+### 0.5.0 (2018/12/19)
 
 * [#29](https://github.com/dblock/fui/pull/29): Added support for ignoring paths through `-i`, `--ignore-path` - [@jeffctown](https://github.com/jeffctown).
 * [#28](https://github.com/dblock/fui/pull/28): Added support for finding global imports (bracket notation) - [@jeffctown](https://github.com/jeffctown).
@@ -7,7 +7,6 @@
 * [#31](https://github.com/dblock/fui/pull/31): Added Danger, PR linter and a README TOC - [@jeffctown](https://github.com/jeffctown).
 * [#32](https://github.com/dblock/fui/pull/32): Added support for ignoring bridging headers - [@jeffctown](https://github.com/jeffctown).
 * [#33](https://github.com/dblock/fui/pull/33): Added RELEASING.md to document release process - [@jeffctown](https://github.com/jeffctown).
-* Your contribution here.
 
 ### 0.4.1 (2017/8/16)
 

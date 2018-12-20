@@ -16,7 +16,7 @@ Check that the last build succeeded in [Travis CI](https://travis-ci.org/dblock/
 Change "Next" in [CHANGELOG.md](CHANGELOG.md) to the current date.
 
 ```
-### 0.4.0 (12/10/2018)
+### 0.4.0 (2016/5/14)
 ```
 
 Remove the line with "Your contribution here.", since there will be no more contributions to this release.
