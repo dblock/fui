@@ -3,6 +3,6 @@
 //  FUI
 //
 
-@interface UnusedClass
+@interface UnusedClass\xAD
 
 @end
