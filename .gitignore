@@ -2,3 +2,4 @@ Gemfile.lock
 pkg
 .bundle
 xcuserdata
+!._*
