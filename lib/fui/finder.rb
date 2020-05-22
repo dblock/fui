@@ -50,6 +50,10 @@ module Fui
 
     private
 
+    def fix_encoding(file_contents)
+      file_contents.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+    end
+
     # Find all files for which the block yields.
     def find(path)
       results = []
@@ -89,6 +93,10 @@ module Fui
         headers.each do |header|
           filename_without_extension = File.basename(path, File.extname(path))
           file_contents = File.read(file)
+          unless file_contents.valid_encoding?
+            puts "Invalid encoding for #{filename_without_extension}" if options[:verbose]
+            file_contents = fix_encoding(file_contents)
+          end
           global_import_exists = global_imported(file_contents, header)
           local_import_exists = local_imported(file_contents, header)
           references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
