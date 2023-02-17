@@ -24,19 +24,19 @@ Find unused Objective-C imports.
 
 ## Usage
 
-```
+```sh
 gem install fui
 ```
 
 ### Get Help
 
-```
+```sh
 fui help
 ```
 
 ### Find Unused Classes in the Current Directory
 
-```
+```sh
 fui find
 ```
 
@@ -44,7 +44,7 @@ The `find` command lists all the files that contain unused imports and exits wit
 
 ### Find Unused Classes in any Path
 
-```
+```sh
 fui --path=~/source/project/Name find
 ```
 
@@ -52,7 +52,7 @@ fui --path=~/source/project/Name find
 
 Running `fui` with `-x` (or `--ignore-xib-files`) will, for example, mark `Foo.h` as unused when `Foo.xib` holds a reference to the `Foo` class and no other references to Foo.h exist.
 
-```
+```sh
 fui -x --path=~/source/project/Name find
 ```
 
@@ -60,7 +60,7 @@ fui -x --path=~/source/project/Name find
 
 Running `fui` with `-l` (or `--ignore-local-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a local (quotation syntax) import of `Foo.h` (eg. `#import Foo.h`).
 
-```
+```sh
 fui -l --path=~/source/project/Name find
 ```
 
@@ -68,7 +68,7 @@ fui -l --path=~/source/project/Name find
 
 Running `fui` with `-g` (or `--ignore-global-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a global (bracket syntax) import of `Foo.h` (eg. `#import <Framework/Foo.h>`).
 
-```
+```sh
 fui -g --path=~/source/project/Name find
 ```
 
@@ -76,7 +76,7 @@ fui -g --path=~/source/project/Name find
 
 Running `fui` with `-i` (or `--ignore-path`) will, for example, ignore a `Pods` folder when searching for headers or referencing files.
 
-```
+```sh
 fui --path=~/source/project/Name --ignore-path=Pods find
 ```
 
@@ -84,13 +84,13 @@ fui --path=~/source/project/Name --ignore-path=Pods find
 
 Running `fui` with `-i` (or `--ignore-path`) can ignore multiple folders when searching for headers or referencing files.
 
-```
+```sh
 fui --path=~/source/project/Name --ignore-path=Pods --ignore-path=Libraries find
 ```
 
 ### Delete All Unused Class Files with Prompt
 
-```
+```sh
 fui --path=~/source/project/Name delete --perform --prompt
 ```
 
