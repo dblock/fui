@@ -84,26 +84,36 @@ module Fui
     end
 
     def process_code(references, path)
-      File.open(path) do |file|
-        yield path if block_given?
-        headers.each do |header|
-          filename_without_extension = File.basename(path, File.extname(path))
-          file_contents = File.read(file)
-          global_import_exists = global_imported(file_contents, header)
-          local_import_exists = local_imported(file_contents, header)
-          references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
+      begin
+        File.open(path) do |file|
+          yield path if block_given?
+          headers.each do |header|
+            filename_without_extension = File.basename(path, File.extname(path))
+            file_contents = File.read(file)
+            global_import_exists = global_imported(file_contents, header)
+            local_import_exists = local_imported(file_contents, header)
+            references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
+          end
         end
+      rescue => e
+        puts "File Process Error: #{e}, Path: #{path}"
+        exit -1
       end
     end
 
     def process_xml(references, path)
-      File.open(path) do |file|
-        yield path if block_given?
-        headers.each do |header|
-          filename_without_extension = File.basename(path, File.extname(path))
-          check_xibs = !options['ignore-xib-files']
-          references[header] << path if (check_xibs || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
+      begin
+        File.open(path) do |file|
+          yield path if block_given?
+          headers.each do |header|
+            filename_without_extension = File.basename(path, File.extname(path))
+            check_xibs = !options['ignore-xib-files']
+            references[header] << path if (check_xibs || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
+          end
         end
+      rescue
+        puts "File Process Error: #{e}, Path: #{path}"
+        exit -1
       end
     end
   end
