@@ -1,0 +1,13 @@
+name: Danger
+
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+
+jobs:
+  danger:
+    uses: numbata/danger-pr-comment/.github/workflows/danger-run.yml@v0.1.0
+    secrets: inherit
+    with:
+      ruby-version: '3.4'
+      bundler-cache: true

@@ -1,5 +1,6 @@
 ### 0.5.1 (Next)
 
+* [#45](https://github.com/dblock/fui/pull/45): Migrated from Travis CI to GitHub Actions with danger-pr-comment workflow - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.0 (2018/12/19)
