@@ -1,5 +1,0 @@
-rvm:
-  - 2.5.3
-
-before_script:
-  - bundle exec danger
