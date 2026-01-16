@@ -22,7 +22,7 @@ module Fui
 
           path_tokens = tokens[1].split('/')
           bridging_header = path_tokens[path_tokens.length - 1]
-          puts "Bridging Header Found: #{bridging_header} in #{project_path}." if verbose
+          puts "Bridging Header Found: #{bridging_header} in #{path}." if verbose
           bridging_headers << bridging_header
         end
         bridging_headers.uniq
