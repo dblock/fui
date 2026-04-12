@@ -1,4 +1,4 @@
-### 0.5.1 (Next)
+### 0.6.0 (2026/04/12)
 
 * [#45](https://github.com/dblock/fui/pull/45): Migrated from Travis CI to GitHub Actions with danger-pr-comment workflow - [@dblock](https://github.com/dblock).
 * [#47](https://github.com/dblock/fui/pull/47): Fixed `ArgumentError: invalid byte sequence in UTF-8` when processing files with non-UTF-8 encoding - [@dblock](https://github.com/dblock).
@@ -6,7 +6,7 @@
 * [#49](https://github.com/dblock/fui/pull/49): Added summary output to `find` command: prints `Found N unused header(s).` or `No unused imports found.` - [@dblock](https://github.com/dblock).
 * [#50](https://github.com/dblock/fui/pull/50): Fixed `delete` command to also remove `.mm` (Objective-C++) implementation files - [@dblock](https://github.com/dblock).
 * [#51](https://github.com/dblock/fui/pull/51): Added support for Ruby 4.x - [@dblock](https://github.com/dblock).
-* Your contribution here.
+* [#52](https://github.com/dblock/fui/pull/52): Clarified README: fui finds unreferenced header files, not unused imports within files - [@dblock](https://github.com/dblock).
 
 ### 0.5.0 (2018/12/19)
 

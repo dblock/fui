@@ -11,7 +11,7 @@ bundle install
 rake
 ```
 
-Check that the last build succeeded in [Travis CI](https://travis-ci.org/dblock/fui).
+Check that the last build succeeded in [GitHub Actions](https://github.com/dblock/fui/actions).
 
 Change "Next" in [CHANGELOG.md](CHANGELOG.md) to the current date.
 
