@@ -11,7 +11,7 @@ Style/Documentation:
 Metrics:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 256
 
 inherit_from: .rubocop_todo.yml
