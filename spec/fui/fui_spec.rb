@@ -70,5 +70,25 @@ describe Fui do
       end
       pending 'prompts for deletion'
     end
+    describe '#delete with .mm files' do
+      before :each do
+        @mm_fixtures = File.expand_path(File.join(__FILE__, '../../fixtures/mm'))
+      end
+      it "doesn't delete .mm files by default" do
+        output = `"#{@binary}" --verbose --path "#{@mm_fixtures}" delete --no-prompt`
+        output = output.split("\r\n")
+        expect(output).to include 'Removing unused_class.mm (simulation)'
+        expect(File.exist?(File.join(@mm_fixtures, 'unused_class.mm'))).to be true
+      end
+      it 'deletes .mm files with --perform' do
+        Dir.mktmpdir do |tmpdir|
+          FileUtils.cp_r @mm_fixtures.to_s, tmpdir
+          output = `"#{@binary}" --verbose --path "#{tmpdir}" delete --no-prompt --perform`
+          output = output.split("\r\n")
+          expect(output).to include 'Removing mm/unused_class.mm'
+          expect(File.exist?(File.join(tmpdir, 'mm/unused_class.mm'))).to be false
+        end
+      end
+    end
   end
 end
