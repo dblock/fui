@@ -179,4 +179,19 @@ describe Fui::Finder do
       end
     end
   end
+  context 'files with non-UTF-8 encoding' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/non_utf8'))
+    end
+    describe '#references' do
+      it 'handles non-UTF-8 encoded files without raising an error' do
+        finder = Fui::Finder.new(@fixtures_dir)
+        expect { finder.references }.not_to raise_error
+      end
+      it 'finds references in files with non-UTF-8 encoding' do
+        finder = Fui::Finder.new(@fixtures_dir)
+        expect(Hash[finder.references.map { |k, v| [k.filename, v.count] }]).to eq('used_class.h' => 1)
+      end
+    end
+  end
 end
