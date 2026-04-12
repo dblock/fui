@@ -38,7 +38,7 @@ command :find do |c|
       end
     end
     count = $fui.unused_references.count
-    puts count > 0 ? "Found #{count} unused header(s)." : 'No unused imports found.'
+    puts count > 0 ? "Found #{count} unused #{count == 1 ? 'header' : 'headers'}." : 'No unused imports found.'
     exit_now! nil, count
   end
 end
