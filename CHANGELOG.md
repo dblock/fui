@@ -5,6 +5,7 @@
 * [#48](https://github.com/dblock/fui/pull/48): Fixed `NameError: undefined local variable or method 'project_path'` in verbose mode - [@dblock](https://github.com/dblock).
 * [#49](https://github.com/dblock/fui/pull/49): Added summary output to `find` command: prints `Found N unused header(s).` or `No unused imports found.` - [@dblock](https://github.com/dblock).
 * [#50](https://github.com/dblock/fui/pull/50): Fixed `delete` command to also remove `.mm` (Objective-C++) implementation files - [@dblock](https://github.com/dblock).
+* [#51](https://github.com/dblock/fui/pull/51): Added support for Ruby 4.x - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.0 (2018/12/19)
