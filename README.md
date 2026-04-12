@@ -6,6 +6,10 @@ Fui
 
 Find unused Objective-C imports.
 
+> **What fui does:** finds header (`.h`) files that are never imported anywhere in your project — i.e. classes that can potentially be deleted entirely.
+>
+> **What fui does not do:** find `#import` statements within a file that are unused by that file's code. For that, use a tool like [Clang's unused-includes warning](https://clang.llvm.org/docs/DiagnosticsReference.html) or AppCode.
+
 # Table of Contents
 
 - [Usage](#usage)
@@ -40,7 +44,7 @@ fui help
 fui find
 ```
 
-The `find` command lists all the files that contain unused imports and exits with the number of files found.
+The `find` command lists all header (`.h`) files that are not imported anywhere in the project, and exits with the number of such files found.
 
 ### Find Unused Classes in any Path
 
