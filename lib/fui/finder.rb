@@ -84,26 +84,23 @@ module Fui
     end
 
     def process_code(references, path)
-      File.open(path) do |file|
-        yield path if block_given?
-        headers.each do |header|
-          filename_without_extension = File.basename(path, File.extname(path))
-          file_contents = File.read(file)
-          global_import_exists = global_imported(file_contents, header)
-          local_import_exists = local_imported(file_contents, header)
-          references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
-        end
+      yield path if block_given?
+      file_contents = File.read(path, encoding: 'binary').encode('UTF-8', invalid: :replace, undef: :replace)
+      headers.each do |header|
+        filename_without_extension = File.basename(path, File.extname(path))
+        global_import_exists = global_imported(file_contents, header)
+        local_import_exists = local_imported(file_contents, header)
+        references[header] << path if filename_without_extension != header.filename_without_extension && (local_import_exists || global_import_exists)
       end
     end
 
     def process_xml(references, path)
-      File.open(path) do |file|
-        yield path if block_given?
-        headers.each do |header|
-          filename_without_extension = File.basename(path, File.extname(path))
-          check_xibs = !options['ignore-xib-files']
-          references[header] << path if (check_xibs || filename_without_extension != header.filename_without_extension) && File.read(file).include?("customClass=\"#{header.filename_without_extension}\"")
-        end
+      yield path if block_given?
+      file_contents = File.read(path, encoding: 'binary').encode('UTF-8', invalid: :replace, undef: :replace)
+      headers.each do |header|
+        filename_without_extension = File.basename(path, File.extname(path))
+        check_xibs = !options['ignore-xib-files']
+        references[header] << path if (check_xibs || filename_without_extension != header.filename_without_extension) && file_contents.include?("customClass=\"#{header.filename_without_extension}\"")
       end
     end
   end
