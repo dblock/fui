@@ -24,6 +24,10 @@ describe Fui::Project do
       project = Fui::Project.new(@fixture)
       expect(project.bridging_headers(false)).to eq(['BridgingHeaderSpec-Bridging-Header.h'])
     end
+    it 'bridging headers are found in verbose mode' do
+      project = Fui::Project.new(@fixture)
+      expect { project.bridging_headers(true) }.not_to raise_error
+    end
   end
   describe '#bridging_headers' do
     before :each do
