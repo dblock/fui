@@ -15,11 +15,11 @@ describe Fui do
     describe '#find' do
       it 'is the default action' do
         files = `"#{@binary}" --path "#{@fixtures}"`
-        expect(files.split("\n")).to eq ['unused_class.h']
+        expect(files.split("\n")).to eq ['unused_class.h', 'Found 1 unused header(s).']
       end
       it 'finds all unreferences headers' do
         files = `"#{@binary}" --path "#{@fixtures}" find`
-        expect(files.split("\n")).to eq ['unused_class.h']
+        expect(files.split("\n")).to eq ['unused_class.h', 'Found 1 unused header(s).']
       end
       it 'defaults to the current directory' do
         files = `"#{@binary}"`
@@ -27,14 +27,15 @@ describe Fui do
       end
       it 'defaults to the current directory and returns unreferenced headers relative to it' do
         files = `cd #{@fixtures} ; "#{@binary}"`
-        expect(files.split("\n")).to eq ['unused_class.h']
+        expect(files.split("\n")).to eq ['unused_class.h', 'Found 1 unused header(s).']
       end
       it 'returns a non-zero error code when files are found' do
         `cd #{@fixtures} ; "#{@binary}"`
         expect($CHILD_STATUS.exitstatus).to eq 1
       end
       it 'returns a zero error code when no files are found' do
-        _files = `cd #{File.expand_path(File.join(__FILE__, '../../../bin/'))} ; "#{@binary}"`
+        files = `cd #{File.expand_path(File.join(__FILE__, '../../../bin/'))} ; "#{@binary}"`
+        expect(files.split("\n")).to eq ['No unused imports found.']
         expect($CHILD_STATUS.exitstatus).to eq 0
       end
     end

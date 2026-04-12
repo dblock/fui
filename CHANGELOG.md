@@ -3,6 +3,7 @@
 * [#45](https://github.com/dblock/fui/pull/45): Migrated from Travis CI to GitHub Actions with danger-pr-comment workflow - [@dblock](https://github.com/dblock).
 * [#37](https://github.com/dblock/fui/issues/37): Fixed `ArgumentError: invalid byte sequence in UTF-8` when processing files with non-UTF-8 encoding - [@dblock](https://github.com/dblock).
 * [#42](https://github.com/dblock/fui/issues/42): Fixed `NameError: undefined local variable or method 'project_path'` in verbose mode - [@dblock](https://github.com/dblock).
+* [#38](https://github.com/dblock/fui/issues/38): Added summary output to `find` command: prints `Found N unused header(s).` or `No unused imports found.` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.5.0 (2018/12/19)
