@@ -6,6 +6,7 @@
 * [#56](https://github.com/dblock/fui/pull/56): Update Danger to the danger/danger-pr-comment 0.3.0 workflows and gem - [@dblock](https://github.com/dblock).
 * [#62](https://github.com/dblock/fui/pull/62): Pin the danger/danger-pr-comment 0.3.0 workflows by commit, skip empty Danger comments, and cancel superseded Danger runs - [@dblock](https://github.com/dblock).
 * [#58](https://github.com/dblock/fui/pull/58): Find imports without a space or with extra spaces, such as `#import"header.h"` - [@dblock](https://github.com/dblock).
+* [#59](https://github.com/dblock/fui/pull/59): Find headers referenced with `#include`, including from `.c`, `.cc`, and `.cpp` files - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.6.0 (2026/04/12)

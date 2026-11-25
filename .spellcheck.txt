@@ -2,6 +2,7 @@ AppCode
 BridgingHeaderSpec
 CHANGELOG
 codebase
+cpp
 customClass
 dblock
 Doubrovkine
