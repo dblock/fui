@@ -17,7 +17,7 @@ describe Fui do
         files = `"#{@binary}" --path "#{@fixtures}"`
         expect(files.split("\n")).to eq ['unused_class.h', 'Found 1 unused header.']
       end
-      it 'finds all unreferences headers' do
+      it 'finds all unreferenced headers' do
         files = `"#{@binary}" --path "#{@fixtures}" find`
         expect(files.split("\n")).to eq ['unused_class.h', 'Found 1 unused header.']
       end
