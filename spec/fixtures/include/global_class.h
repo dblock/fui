@@ -1,0 +1,3 @@
+@interface GlobalClass
+
+@end

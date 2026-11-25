@@ -34,7 +34,7 @@ module Fui
           references[header] = []
         end
         Find.find(path) do |path|
-          if ['.m', '.mm', '.h', '.pch'].include?(File.extname(path))
+          if ['.m', '.mm', '.h', '.pch', '.c', '.cc', '.cpp'].include?(File.extname(path))
             process_code references, path, &block
           elsif ['.storyboard', '.xib'].include?(File.extname(path))
             process_xml references, path, &block
@@ -72,13 +72,13 @@ module Fui
     def local_imported(file_contents, header)
       return false if options['ignore-local-imports']
 
-      file_contents.match?(/#\s*import\s*"#{Regexp.quote(header.filename)}"/)
+      file_contents.match?(/#\s*(?:import|include)\s*"#{Regexp.quote(header.filename)}"/)
     end
 
     def global_imported(file_contents, header)
       return false if options['ignore-global-imports']
 
-      file_contents.match?(%r{#\s*import\s*<.+/#{Regexp.quote(header.filename)}>})
+      file_contents.match?(%r{#\s*(?:import|include)\s*<.+/#{Regexp.quote(header.filename)}>})
     end
 
     def process_code(references, path)

@@ -1,0 +1,3 @@
+@interface CClass
+
+@end
