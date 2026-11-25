@@ -179,6 +179,17 @@ describe Fui::Finder do
       end
     end
   end
+  context 'imports without a space or with extra spaces' do
+    before :each do
+      @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/import_without_space'))
+    end
+    describe '#unsed_references' do
+      it 'finds unused references' do
+        finder = Fui::Finder.new(@fixtures_dir)
+        expect(Hash[finder.unused_references.map { |k, v| [k.filename, v.count] }]).to eq('unused_class.h' => 0)
+      end
+    end
+  end
   context 'files with non-UTF-8 encoding' do
     before :each do
       @fixtures_dir = File.expand_path(File.join(__FILE__, '../../fixtures/non_utf8'))
