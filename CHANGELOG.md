@@ -1,4 +1,4 @@
-### 0.7.0 (Next)
+### 0.7.0 (2026/11/25)
 
 * [#53](https://github.com/dblock/fui/pull/53): Test on Ruby 2.7, 3.4, and 4.0 with a `matrix.entry` matrix and current GitHub Actions - [@dblock](https://github.com/dblock).
 * [#54](https://github.com/dblock/fui/pull/54): Lint Markdown, YAML, and spelling with rubocop-md, rubocop-prose, rubocop-spellcheck, and rubocop-yaml in a separate Lint workflow, and clean up documentation - [@dblock](https://github.com/dblock).
@@ -9,7 +9,6 @@
 * [#59](https://github.com/dblock/fui/pull/59): Find headers referenced with `#include`, including from `.c`, `.cc`, and `.cpp` files - [@dblock](https://github.com/dblock).
 * [#60](https://github.com/dblock/fui/pull/60): Find imports whose case differs from the header file name, such as `#import "myclass.h"` for `MyClass.h` - [@dblock](https://github.com/dblock).
 * [#63](https://github.com/dblock/fui/pull/63): Release with ruby-gem-release through a manually dispatched GitHub Actions workflow and RubyGems Trusted Publishing - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 0.6.0 (2026/04/12)
 
