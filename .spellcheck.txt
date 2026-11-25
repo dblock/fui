@@ -1,5 +1,6 @@
 AppCode
 BridgingHeaderSpec
+Bundler
 CHANGELOG
 codebase
 cpp
@@ -12,9 +13,12 @@ Fui
 fui
 Fui's
 fui's
+FuiRelease
+Gemfile
 gemspec
 gli
 jeffctown
+JRuby
 linter
 md
 MERCHANTABILITY
@@ -23,9 +27,12 @@ NONINFRINGEMENT
 paulyoung
 pbxproj
 pch
+Rakefile
 rb
 README
+RSpec
 rubocop
+RubyGems
 shachlan
 stty
 subclasses
