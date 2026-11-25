@@ -2,3 +2,5 @@ Gemfile.lock
 pkg
 .bundle
 xcuserdata
+
+/vendor/bundle/
