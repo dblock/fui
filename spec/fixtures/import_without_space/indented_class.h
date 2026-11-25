@@ -1,0 +1,3 @@
+@interface IndentedClass
+
+@end

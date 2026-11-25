@@ -72,15 +72,13 @@ module Fui
     def local_imported(file_contents, header)
       return false if options['ignore-local-imports']
 
-      file_contents.include?("#import \"#{header.filename}\"")
+      file_contents.match?(/#\s*import\s*"#{Regexp.quote(header.filename)}"/)
     end
 
     def global_imported(file_contents, header)
       return false if options['ignore-global-imports']
 
-      escaped_header = Regexp.quote(header.filename)
-      regex = '(#import\s{1}<.+\/' + escaped_header + '>)'
-      file_contents.match(regex)
+      file_contents.match?(%r{#\s*import\s*<.+/#{Regexp.quote(header.filename)}>})
     end
 
     def process_code(references, path)

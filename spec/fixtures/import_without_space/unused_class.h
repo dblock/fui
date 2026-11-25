@@ -1,0 +1,3 @@
+@interface UnusedClass
+
+@end
