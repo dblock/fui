@@ -1,4 +1,4 @@
-name: RuboCop
+name: Lint
 
 on:
   push:
@@ -8,8 +8,8 @@ permissions:
   contents: read
 
 jobs:
-  rubocop:
-    name: RuboCop
+  lint:
+    name: Lint Code and Documentation
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Code
@@ -19,5 +19,5 @@ jobs:
         with:
           ruby-version: '4.0'
           bundler-cache: true
-      - name: Run RuboCop
-        run: bundle exec rubocop
+      - name: Run Lint
+        run: bundle exec rake lint

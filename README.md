@@ -1,8 +1,6 @@
-Fui
-==========
+# Fui
 
-[![Gem Version](https://badge.fury.io/rb/fui.svg)](https://badge.fury.io/rb/fui)
-[![Test](https://github.com/dblock/fui/actions/workflows/test.yml/badge.svg)](https://github.com/dblock/fui/actions/workflows/test.yml)
+[![Gem Version](https://badge.fury.io/rb/fui.svg)](https://badge.fury.io/rb/fui) [![Test](https://github.com/dblock/fui/actions/workflows/test.yml/badge.svg)](https://github.com/dblock/fui/actions/workflows/test.yml) [![Lint](https://github.com/dblock/fui/actions/workflows/lint.yml/badge.svg)](https://github.com/dblock/fui/actions/workflows/lint.yml)
 
 Find unused Objective-C imports.
 
@@ -15,8 +13,8 @@ Find unused Objective-C imports.
 - [Usage](#usage)
   - [Get Help](#get-help)
   - [Find Unused Classes in the Current Directory](#find-unused-classes-in-the-current-directory)
-  - [Find Unused Classes in any Path](#find-unused-classes-in-any-path)
-  - [Skip Interface Builder (.xib) Files](#skip-interface-builder-xib-files)
+  - [Find Unused Classes in Any Path](#find-unused-classes-in-any-path)
+  - [Skip Interface Builder (XIB) Files](#skip-interface-builder-xib-files)
   - [Ignore Local Imports](#ignore-local-imports)
   - [Ignore Global Imports](#ignore-global-imports)
   - [Ignore a Path](#ignore-a-path)
@@ -46,13 +44,13 @@ fui find
 
 The `find` command lists all header (`.h`) files that are not imported anywhere in the project, and exits with the number of such files found.
 
-### Find Unused Classes in any Path
+### Find Unused Classes in Any Path
 
 ```sh
 fui --path=~/source/project/Name find
 ```
 
-### Skip Interface Builder (.xib) Files
+### Skip Interface Builder (XIB) Files
 
 Running `fui` with `-x` (or `--ignore-xib-files`) will, for example, mark `Foo.h` as unused when `Foo.xib` holds a reference to the `Foo` class and no other references to Foo.h exist.
 
@@ -62,7 +60,7 @@ fui -x --path=~/source/project/Name find
 
 ### Ignore Local Imports
 
-Running `fui` with `-l` (or `--ignore-local-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a local (quotation syntax) import of `Foo.h` (eg. `#import Foo.h`).
+Running `fui` with `-l` (or `--ignore-local-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a local (quotation syntax) import of `Foo.h` (e.g. `#import Foo.h`).
 
 ```sh
 fui -l --path=~/source/project/Name find
@@ -70,7 +68,7 @@ fui -l --path=~/source/project/Name find
 
 ### Ignore Global Imports
 
-Running `fui` with `-g` (or `--ignore-global-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a global (bracket syntax) import of `Foo.h` (eg. `#import <Framework/Foo.h>`).
+Running `fui` with `-g` (or `--ignore-global-imports`) will, for example, mark `Foo.h` as unused when `Bar.h` contains a global (bracket syntax) import of `Foo.h` (e.g. `#import <Framework/Foo.h>`).
 
 ```sh
 fui -g --path=~/source/project/Name find
@@ -104,7 +102,7 @@ Use [xcfui](https://github.com/jcavar/xcfui) for integration with Xcode.
 
 ## Contributing
 
-There're [a few feature requests and known issues](https://github.com/dblock/fui/issues). Please contribute! See [CONTRIBUTING](CONTRIBUTING.md).
+There are [a few feature requests and known issues](https://github.com/dblock/fui/issues). Please contribute! See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Copyright and License
 
