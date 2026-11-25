@@ -4,7 +4,7 @@ gemspec
 
 gem 'danger'
 gem 'danger-changelog'
-gem 'danger-pr-comment', '0.1.0'
+gem 'danger-pr-comment', '~> 0.3', require: false
 gem 'danger-toc'
 gem 'rake'
 gem 'rspec', '~> 3.13'
