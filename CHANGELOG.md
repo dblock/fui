@@ -1,5 +1,6 @@
 ### 0.7.0 (Next)
 
+* [#53](https://github.com/dblock/fui/pull/53): Test on Ruby 2.7, 3.4, and 4.0 with a `matrix.entry` matrix and current GitHub Actions - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.6.0 (2026/04/12)
