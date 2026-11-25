@@ -4,6 +4,7 @@
 * [#54](https://github.com/dblock/fui/pull/54): Lint Markdown, YAML, and spelling with rubocop-md, rubocop-prose, rubocop-spellcheck, and rubocop-yaml in a separate Lint workflow, and clean up documentation - [@dblock](https://github.com/dblock).
 * [#55](https://github.com/dblock/fui/pull/55): Run CI pushes only on the default branch, cancel superseded pull request runs, and bound job times - [@dblock](https://github.com/dblock).
 * [#56](https://github.com/dblock/fui/pull/56): Update Danger to the danger/danger-pr-comment 0.3.0 workflows and gem - [@dblock](https://github.com/dblock).
+* [#62](https://github.com/dblock/fui/pull/62): Pin the danger/danger-pr-comment 0.3.0 workflows by commit, skip empty Danger comments, and cancel superseded Danger runs - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 ### 0.6.0 (2026/04/12)

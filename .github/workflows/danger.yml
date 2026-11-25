@@ -4,10 +4,18 @@ on:
   pull_request:
     types: [opened, reopened, edited, synchronize]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   danger:
-    uses: danger/danger-pr-comment/.github/workflows/danger-run.yml@v0.3.0
-    secrets: inherit
+    name: Review Pull Request
+    # danger/danger-pr-comment v0.3.0
+    uses: danger/danger-pr-comment/.github/workflows/danger-run.yml@645e89bcc7be89ee7e8362166110b05cbced8e59
     with:
       ruby-version: '4.0'
       bundler-cache: true
