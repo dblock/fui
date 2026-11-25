@@ -72,13 +72,13 @@ module Fui
     def local_imported(file_contents, header)
       return false if options['ignore-local-imports']
 
-      file_contents.match?(/#\s*(?:import|include)\s*"#{Regexp.quote(header.filename)}"/)
+      file_contents.match?(/#\s*(?:import|include)\s*"#{Regexp.quote(header.filename)}"/i)
     end
 
     def global_imported(file_contents, header)
       return false if options['ignore-global-imports']
 
-      file_contents.match?(%r{#\s*(?:import|include)\s*<.+/#{Regexp.quote(header.filename)}>})
+      file_contents.match?(%r{#\s*(?:import|include)\s*<.+/#{Regexp.quote(header.filename)}>}i)
     end
 
     def process_code(references, path)
